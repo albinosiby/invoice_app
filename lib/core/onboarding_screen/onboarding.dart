@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:invoice/constants/app_constants.dart';
 
-import 'package:invoice/core/auth/screen/signup_screen.dart';
-import 'package:invoice/widgets/widgets.dart';
+import 'package:invoice_app/constants/app_constants.dart';
+import 'package:invoice_app/core/auth/screen/signup_screen.dart';
+import 'package:invoice_app/widgets/widgets.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});

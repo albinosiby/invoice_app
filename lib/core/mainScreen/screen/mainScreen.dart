@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invoice/config/themes/theme_config.dart';
+import 'package:invoice_app/config/themes/theme_config.dart';
 import '../bloc/main_screen_bloc.dart';
 import '../../../../../modules/home/screen/home_Screen.dart';
 import '../../../../../modules/Clients/screen/client_screen.dart';
@@ -14,9 +14,9 @@ class Mainscreen extends StatelessWidget {
 
   static final List<Widget> _screens = [
     const HomeScreen(),
-    const InvoiceScreen(),
-    const Clientscreen(),
+    InvoicesScreen(),
     const EstimateScreen(),
+    const Clientscreen(),
     const ReportScreen(),
   ];
 

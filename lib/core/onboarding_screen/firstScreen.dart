@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:invoice/constants/app_constants.dart';
-import 'package:invoice/core/auth/screen/login_screen.dart';
-import 'package:invoice/core/onboarding_screen/onboarding.dart';
-import 'package:invoice/widgets/widgets.dart';
+import 'package:invoice_app/constants/app_constants.dart';
+import 'package:invoice_app/core/auth/screen/login_screen.dart';
+import 'package:invoice_app/core/onboarding_screen/onboarding.dart';
+import 'package:invoice_app/widgets/widgets.dart';
 
 class Firstscreen extends StatelessWidget {
   const Firstscreen({super.key});
@@ -38,7 +38,7 @@ class Firstscreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               customButtonLarge(context, 'Get Started', () {
-                Navigator.of(context).push(
+                Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => OnboardingPage()),
                 );
               }),
@@ -52,7 +52,7 @@ class Firstscreen extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => const LoginScreen(),
                         ),

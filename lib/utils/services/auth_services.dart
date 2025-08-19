@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:invoice/core/auth/model/auth_models.dart';
+import 'package:invoice_app/core/auth/model/auth_models.dart';
 // Import the user model
 
 class AuthService {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:invoice/core/auth/screen/signup_screen.dart';
-import 'package:invoice/core/mainScreen/screen/mainScreen.dart';
-import 'package:invoice/widgets/widgets.dart';
+import 'package:invoice_app/core/auth/screen/signup_screen.dart';
+import 'package:invoice_app/core/mainScreen/screen/mainScreen.dart';
+import 'package:invoice_app/widgets/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        'Invoice',
+                        'invoice_app',
                         style: theme.textTheme.displayLarge?.copyWith(
                           color: theme.colorScheme.primary,
                         ),
@@ -42,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 Center(
                   child: Text(
-                    'Login to your Invoice account',
+                    'Login to your invoice_app account',
                     style: theme.textTheme.bodyLarge?.copyWith(
                       color: theme.colorScheme.onBackground,
                     ),
@@ -106,9 +106,9 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 customButtonLarge(context, 'Login', () {
-                  Navigator.of(
-                    context,
-                  ).push(MaterialPageRoute(builder: (context) => Mainscreen()));
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => Mainscreen()),
+                  );
                 }),
 
                 const SizedBox(height: 24),
@@ -146,7 +146,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => Mainscreen()),
                       );
                     },
@@ -172,7 +172,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => Mainscreen()),
                       );
                     },
@@ -188,7 +188,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).push(
+                        Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: (context) => const SignUpPage(),
                           ),

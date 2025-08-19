@@ -52,3 +52,25 @@ Widget customButtonSmall(
     ),
   );
 }
+
+Widget smallButtton(context, text, onPressed) {
+  return SizedBox(
+    width: 169,
+    height: 52,
+    child: ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+      ),
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
+      ),
+    ),
+  );
+}

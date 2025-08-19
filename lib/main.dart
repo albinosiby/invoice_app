@@ -1,57 +1,41 @@
+// file: lib/main.dart
+
 import 'package:flutter/material.dart';
-import 'package:invoice/config/themes/dark_theme.dart';
-import 'package:invoice/config/themes/light_theme.dart';
-import 'package:invoice/core/mainScreen/screen/mainScreen.dart';
-import 'package:invoice/core/onboarding_screen/firstScreen.dart';
-import 'package:invoice/modules/home/screen/home_Screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:invoice_app/config/routes/theme_cubit.dart';
+import 'package:invoice_app/config/themes/dark_theme.dart';
+import 'package:invoice_app/config/themes/light_theme.dart';
+import 'package:invoice_app/core/mainScreen/screen/mainScreen.dart';
+import 'package:invoice_app/core/onboarding_screen/firstScreen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
-// This is the root of our application, which manages the theme state.
-class MyApp extends StatefulWidget {
+// MyApp is now much simpler!
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  // We use ThemeMode.system by default to follow the OS theme.
-  ThemeMode _themeMode = ThemeMode.system;
-
-  // Toggles the theme between light and dark.
-  void _toggleTheme() {
-    setState(() {
-      _themeMode = (_themeMode == ThemeMode.light)
-          ? ThemeMode.dark
-          : ThemeMode.light;
-    });
-  }
-
-  // Toggles the theme to follow the system settings.
-  void _toggleSystemTheme() {
-    setState(() {
-      _themeMode = (_themeMode == ThemeMode.system)
-          ? ThemeMode.light
-          : ThemeMode.system;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Invoice app',
-      debugShowCheckedModeBanner: false,
-      // The light theme is defined in light_theme.dart
-      theme: lightTheme,
-      // The dark theme is defined in dark_theme.dart
-      darkTheme: darkTheme,
-      // The current theme mode is controlled by our state.
-      themeMode: _themeMode,
-      // We pass the theme toggling methods down to the HomePage.
-      home: Firstscreen(),
+    // Provide the ThemeCubit to the entire app.
+    return BlocProvider(
+      create: (context) => ThemeCubit(),
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, state) {
+          // The MaterialApp rebuilds whenever the ThemeState changes.
+          return MaterialApp(
+            title: 'Invoice app',
+            debugShowCheckedModeBanner: false,
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: state.themeMode, // Set themeMode from the cubit's state
+            home: Mainscreen(),
+          );
+        },
+      ),
     );
   }
 }

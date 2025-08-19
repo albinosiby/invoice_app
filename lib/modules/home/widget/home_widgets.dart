@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invoice/config/themes/theme_config.dart';
+import 'package:invoice_app/config/themes/theme_config.dart';
 
 Widget dashboardCard(
   theme,
@@ -50,39 +50,20 @@ Widget dashboardCard(
   );
 }
 
-Widget smallButtton(context, text, onPressed) {
-  return SizedBox(
-    width: 169,
-    height: 52,
-    child: ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-      ),
-      child: Text(
-        text,
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-          color: Theme.of(context).colorScheme.onPrimary,
-        ),
-      ),
-    ),
-  );
-}
-
 Widget upComingDue(
-  theme,
-  clientName,
-  invoiceNumber,
-  amount,
-  status,
-  daysDue,
-  dueDate,
+  ThemeData theme,
+  String clientName,
+  String invoiceNumber,
+  String amount,
+  String status,
+  String daysDue,
+  String dueDate,
+  VoidCallback onRecordManually, // New parameter
+  VoidCallback onSendReminder, // New parameter
 ) {
   return SizedBox(
-    height: 130,
+    // ... (Container and other widgets are the same)
+    height: 160, // Increased height slightly to ensure no overflow
     width: 354,
     child: Container(
       padding: const EdgeInsets.all(16),
@@ -91,6 +72,7 @@ Widget upComingDue(
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
+        // ... (The top part of the card is the same)
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -125,15 +107,12 @@ Widget upComingDue(
               ),
             ],
           ),
-
-          const SizedBox(height: 8),
+          const Spacer(), // Use a Spacer to push the buttons to the bottom
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton(
-                onPressed: () {
-                  // Add your logic for "Record Manually" here.
-                },
+                onPressed: onRecordManually, // Use the callback here
                 child: Text(
                   'Record Manually',
                   style: theme.textTheme.labelMedium?.copyWith(
@@ -142,9 +121,7 @@ Widget upComingDue(
                 ),
               ),
               TextButton(
-                onPressed: () {
-                  // Add your logic for "Send Reminder" here.
-                },
+                onPressed: onSendReminder, // Use the callback here
                 child: Text(
                   'Send Reminder',
                   style: theme.textTheme.labelMedium?.copyWith(

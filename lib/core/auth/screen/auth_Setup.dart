@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:invoice/constants/app_constants.dart';
-import 'package:invoice/core/mainScreen/screen/mainScreen.dart';
-import 'package:invoice/widgets/widgets.dart';
+
+import 'package:invoice_app/constants/app_constants.dart';
+import 'package:invoice_app/core/mainScreen/screen/mainScreen.dart';
+import 'package:invoice_app/widgets/widgets.dart';
 
 class AuthSetup extends StatelessWidget {
   const AuthSetup({super.key});
@@ -136,9 +137,9 @@ class AuthSetup extends StatelessWidget {
                 ),
                 const SizedBox(height: 150),
                 customButtonLarge(context, 'Continue', () {
-                  Navigator.of(
-                    context,
-                  ).push(MaterialPageRoute(builder: (context) => Mainscreen()));
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => Mainscreen()),
+                  );
                 }),
               ],
             ),

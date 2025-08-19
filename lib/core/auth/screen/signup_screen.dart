@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:invoice/core/auth/screen/auth_Setup.dart';
-import 'package:invoice/core/auth/screen/login_screen.dart';
-import 'package:invoice/widgets/widgets.dart';
+import 'package:invoice_app/core/auth/screen/auth_Setup.dart';
+import 'package:invoice_app/core/auth/screen/login_screen.dart';
+import 'package:invoice_app/widgets/widgets.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
@@ -23,7 +23,7 @@ class SignUpPage extends StatelessWidget {
                 const SizedBox(height: 16),
                 Center(
                   child: Text(
-                    'Invoice',
+                    'invoice_app',
                     style: theme.textTheme.displayLarge?.copyWith(
                       color: theme.colorScheme.primary,
                     ),
@@ -32,7 +32,7 @@ class SignUpPage extends StatelessWidget {
                 const SizedBox(height: 12),
                 Center(
                   child: Text(
-                    'Set up your Invoice account',
+                    'Set up your invoice_app account',
                     style: theme.textTheme.bodyLarge?.copyWith(
                       color: theme.colorScheme.onBackground,
                     ),
@@ -100,7 +100,7 @@ class SignUpPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 customButtonLarge(context, 'Sign Up', () {
-                  Navigator.of(context).push(
+                  Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => const AuthSetup()),
                   );
                 }),
@@ -140,7 +140,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => const AuthSetup(),
                         ),
@@ -168,7 +168,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => const AuthSetup(),
                         ),
@@ -186,7 +186,7 @@ class SignUpPage extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).push(
+                        Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: (context) => const LoginScreen(),
                           ),
