@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:invoice_app/modules/Invoices/model/invoice_model.dart';
 import 'package:invoice_app/modules/Invoices/repository/invoice_repository.dart';
 
@@ -58,62 +59,62 @@ class InvoiceCubit extends Cubit<InvoiceState> {
   }
 
   Future<void> addInvoice(Invoice invoice) async {
-    if (state is InvoiceLoaded) {
-      final currentState = state as InvoiceLoaded;
-      try {
-        await repository.addInvoice(invoice);
-        final invoices = await repository.getInvoices();
-        emit(
-          InvoiceLoaded(
-            invoices: invoices,
-            selectedFilter: currentState.selectedFilter,
-            searchQuery: currentState.searchQuery,
-          ),
-        );
-      } catch (e) {
-        emit(InvoiceError(message: 'Failed to add invoice: $e'));
-        emit(currentState);
-      }
-    }
+    // if (state is InvoiceLoaded) {
+    //   final currentState = state as InvoiceLoaded;
+    //   try {
+    //     await repository.addInvoice(invoice);
+    //     final invoices = await repository.getInvoices();
+    //     emit(
+    //       InvoiceLoaded(
+    //         invoices: invoices,
+    //         selectedFilter: currentState.selectedFilter,
+    //         searchQuery: currentState.searchQuery,
+    //       ),
+    //     );
+    //   } catch (e) {
+    //     emit(InvoiceError(message: 'Failed to add invoice: $e'));
+    //     emit(currentState);
+    //   }
+    // }
   }
 
   Future<void> updateInvoice(Invoice invoice) async {
-    if (state is InvoiceLoaded) {
-      final currentState = state as InvoiceLoaded;
-      try {
-        await repository.updateInvoice(invoice);
-        final invoices = await repository.getInvoices();
-        emit(
-          InvoiceLoaded(
-            invoices: invoices,
-            selectedFilter: currentState.selectedFilter,
-            searchQuery: currentState.searchQuery,
-          ),
-        );
-      } catch (e) {
-        emit(InvoiceError(message: 'Failed to update invoice: $e'));
-        emit(currentState);
-      }
-    }
+    // if (state is InvoiceLoaded) {
+    //   final currentState = state as InvoiceLoaded;
+    //   try {
+    //     await repository.updateInvoice(invoice);
+    //     final invoices = await repository.getInvoices();
+    //     emit(
+    //       InvoiceLoaded(
+    //         invoices: invoices,
+    //         selectedFilter: currentState.selectedFilter,
+    //         searchQuery: currentState.searchQuery,
+    //       ),
+    //     );
+    //   } catch (e) {
+    //     emit(InvoiceError(message: 'Failed to update invoice: $e'));
+    //     emit(currentState);
+    //   }
+    // }
   }
 
   Future<void> deleteInvoice(String id) async {
-    if (state is InvoiceLoaded) {
-      final currentState = state as InvoiceLoaded;
-      try {
-        await repository.deleteInvoice(id);
-        final invoices = await repository.getInvoices();
-        emit(
-          InvoiceLoaded(
-            invoices: invoices,
-            selectedFilter: currentState.selectedFilter,
-            searchQuery: currentState.searchQuery,
-          ),
-        );
-      } catch (e) {
-        emit(InvoiceError(message: 'Failed to delete invoice: $e'));
-        emit(currentState);
-      }
-    }
+    //   if (state is InvoiceLoaded) {
+    //     final currentState = state as InvoiceLoaded;
+    //     try {
+    //       await repository.deleteInvoice(id);
+    //       final invoices = await repository.getInvoices();
+    //       emit(
+    //         InvoiceLoaded(
+    //           invoices: invoices,
+    //           selectedFilter: currentState.selectedFilter,
+    //           searchQuery: currentState.searchQuery,
+    //         ),
+    //       );
+    //     } catch (e) {
+    //       emit(InvoiceError(message: 'Failed to delete invoice: $e'));
+    //       emit(currentState);
+    //     }
+    //   }
   }
 }

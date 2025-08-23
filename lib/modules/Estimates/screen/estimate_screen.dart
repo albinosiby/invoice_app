@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invoice_app/config/themes/theme_config.dart';
+import 'package:invoice_app/modules/Estimates/screen/add_estimate.dart';
 import 'package:invoice_app/modules/Invoices/widget/invoice_widgets.dart';
 import 'package:invoice_app/modules/settings/screen/settings.dart';
 
@@ -138,7 +139,12 @@ class EstimateScreen extends StatelessWidget {
       ),
 
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddEstimateScreen()),
+          );
+        },
         label: Text(
           'Create Estimate',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(

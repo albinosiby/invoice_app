@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invoice_app/modules/Invoices/cubit/invoice_cubit.dart';
 import 'package:invoice_app/modules/Invoices/model/invoice_model.dart';
 import 'package:invoice_app/modules/Invoices/repository/invoice_repository.dart';
+import 'package:invoice_app/modules/Invoices/screen/add_invoice_screen.dart';
 import 'package:invoice_app/modules/Invoices/widget/invoice_widgets.dart';
 import 'package:invoice_app/modules/settings/screen/settings.dart';
 import 'package:invoice_app/config/themes/theme_config.dart';
@@ -48,35 +49,6 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
     // Update invoice status to paid
     final updatedInvoice = invoice.copyWith(status: 'Paid');
     _invoiceCubit.updateInvoice(updatedInvoice);
-  }
-
-  void _showMoreOptions(Invoice invoice) {
-    // showModalBottomSheet(
-    //   context: context,
-    //   builder: (context) {
-    //     return Column(
-    //       mainAxisSize: MainAxisSize.min,
-    //       children: [
-    //         ListTile(
-    //           leading: const Icon(Icons.edit),
-    //           title: const Text('Edit Invoice'),
-    //           onTap: () {
-    //             Navigator.pop(context);
-    //             // Navigate to edit screen
-    //           },
-    //         ),
-    //         ListTile(
-    //           leading: const Icon(Icons.delete),
-    //           title: const Text('Delete Invoice'),
-    //           onTap: () {
-    //             Navigator.pop(context);
-    //             //_invoiceCubit.deleteInvoice(invoice.id);
-    //           },
-    //         ),
-    //       ],
-    //     );
-    //   },
-    // );
   }
 
   @override
@@ -244,7 +216,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                               theme,
                               invoice,
                               () => _handleRecordPayment(invoice),
-                              () => _showMoreOptions(invoice),
+                              () => () {},
                             ),
                           );
                         },
@@ -259,7 +231,11 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
           ),
         ),
         floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (context) => AddInvoiceScreen()));
+          },
           label: Text(
             'Create Invoice',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(

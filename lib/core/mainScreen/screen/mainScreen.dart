@@ -16,7 +16,7 @@ class Mainscreen extends StatelessWidget {
     const HomeScreen(),
     InvoicesScreen(),
     const EstimateScreen(),
-    const Clientscreen(),
+    const ClientScreen(),
     const ReportScreen(),
   ];
 
