@@ -3,6 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invoice_app/config/themes/theme_config.dart';
+import 'package:invoice_app/constants/app_constants.dart';
+import 'package:invoice_app/modules/Estimates/screen/add_estimate.dart';
+import 'package:invoice_app/modules/Invoices/screen/add_invoice_screen.dart';
 import 'package:invoice_app/modules/home/model/dashboard_model.dart';
 import 'package:invoice_app/modules/home/repository/home_repository.dart';
 import 'package:invoice_app/modules/home/widget/home_widgets.dart';
@@ -43,13 +46,13 @@ class _HomeScreenBody extends StatelessWidget {
             context,
           ).push(MaterialPageRoute(builder: (_) => SettingsPage()));
         } else if (state is NavigateToCreateInvoice) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Navigate to Create Invoice')),
-          );
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (_) => AddInvoiceScreen()));
         } else if (state is NavigateToAddEstimate) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Navigate to Add Estimate')),
-          );
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (_) => AddEstimateScreen()));
         } else if (state is ReminderSentSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -80,9 +83,10 @@ class _HomeScreenBody extends StatelessWidget {
                 onPressed: () {},
               ),
               IconButton(
-                icon: Icon(
-                  Icons.settings,
-                  color: Theme.of(context).colorScheme.onBackground,
+                icon: Image.asset(
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Iconconstants.settingsWhite
+                      : Iconconstants.settingsBlack,
                 ),
                 onPressed: () => context.read<HomeCubit>().goToSettings(),
               ),
@@ -220,10 +224,10 @@ class _HomeLoadedContent extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Text('Upcoming Due Invoices', style: theme.textTheme.titleLarge),
-          const SizedBox(height: 12),
+          const SizedBox(height: 10),
           if (state.dueInvoices.isNotEmpty)
             SizedBox(
-              height: 160,
+              height: 165,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: state.dueInvoices.length,
@@ -259,21 +263,19 @@ class _HomeLoadedContent extends StatelessWidget {
             ),
           const SizedBox(height: 24),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                child: smallButtton(
-                  context,
-                  'Create Invoice',
-                  () => context.read<HomeCubit>().goToCreateInvoice(),
-                ),
+              smallButtton(
+                context,
+                'Create Invoice',
+                () => context.read<HomeCubit>().goToCreateInvoice(),
+                Iconconstants.addInvoiceWhite,
               ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: smallButtton(
-                  context,
-                  'Add Estimate',
-                  () => context.read<HomeCubit>().goToAddEstimate(),
-                ),
+              smallButtton(
+                context,
+                'Add Estimate',
+                () => context.read<HomeCubit>().goToAddEstimate(),
+                Iconconstants.plusBoxWhite,
               ),
             ],
           ),

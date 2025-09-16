@@ -13,38 +13,43 @@ Widget dashboardCard(
   return SizedBox(
     height: 110,
     width: 159,
-    child: Container(
-      padding: EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(iconCode, color: iconcolor, size: 28),
-          const SizedBox(height: 12),
-          Text(
-            title,
-            style: theme.textTheme.bodyLarge?.copyWith(
-              color: theme.colorScheme.onBackground,
+    child: Material(
+      elevation: 1,
+      borderRadius: BorderRadius.circular(16),
+      color: Colors.transparent,
+      child: Container(
+        padding: EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(iconCode, color: iconcolor, size: 28),
+            const SizedBox(height: 12),
+            Text(
+              title,
+              style: theme.textTheme.bodyLarge?.copyWith(
+                color: theme.colorScheme.onBackground,
+              ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            value,
-            style: theme.textTheme.headlineSmall?.copyWith(
-              color: theme.colorScheme.onBackground,
+            const SizedBox(height: 4),
+            Text(
+              value,
+              style: theme.textTheme.headlineSmall?.copyWith(
+                color: theme.colorScheme.onBackground,
+              ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            subtitle,
-            style: theme.textTheme.labelSmall?.copyWith(
-              color: ThemeConfig.darkButtonTextDisabled,
+            const SizedBox(height: 4),
+            Text(
+              subtitle,
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: ThemeConfig.darkButtonDisabled,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );
@@ -62,76 +67,79 @@ Widget upComingDue(
   VoidCallback onSendReminder, // New parameter
 ) {
   return SizedBox(
-    // ... (Container and other widgets are the same)
-    height: 160, // Increased height slightly to ensure no overflow
+    height: 150,
     width: 354,
-    child: Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        // ... (The top part of the card is the same)
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(clientName, style: theme.textTheme.titleMedium),
-              Text(amount, style: theme.textTheme.titleMedium),
-            ],
-          ),
-          const SizedBox(height: 4),
-          Text(
-            invoiceNumber,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: ThemeConfig.darkButtonTextDisabled,
+    child: Material(
+      elevation: 3,
+      borderRadius: BorderRadius.circular(16),
+      color: Colors.transparent,
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surface,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(clientName, style: theme.textTheme.titleMedium),
+                Text(amount, style: theme.textTheme.titleMedium),
+              ],
             ),
-          ),
-          const SizedBox(height: 2),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '$dueDate | $daysDue',
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: ThemeConfig.darkButtonTextDisabled,
-                ),
+            const SizedBox(height: 4),
+            Text(
+              invoiceNumber,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: ThemeConfig.darkButtonTextDisabled,
               ),
-              Text(
-                status,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: ThemeConfig.warning,
-                ),
-              ),
-            ],
-          ),
-          const Spacer(), // Use a Spacer to push the buttons to the bottom
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextButton(
-                onPressed: onRecordManually, // Use the callback here
-                child: Text(
-                  'Record Manually',
-                  style: theme.textTheme.labelMedium?.copyWith(
-                    color: ThemeConfig.info,
+            ),
+            const SizedBox(height: 2),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '$dueDate | $daysDue',
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: ThemeConfig.darkButtonTextDisabled,
                   ),
                 ),
-              ),
-              TextButton(
-                onPressed: onSendReminder, // Use the callback here
-                child: Text(
-                  'Send Reminder',
-                  style: theme.textTheme.labelMedium?.copyWith(
-                    color: ThemeConfig.success,
+                Text(
+                  status,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: ThemeConfig.warning,
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: onRecordManually,
+                  child: Text(
+                    'Record Manually',
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      color: ThemeConfig.info,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: onSendReminder,
+                  child: Text(
+                    'Send Reminder',
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      color: ThemeConfig.success,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     ),
   );

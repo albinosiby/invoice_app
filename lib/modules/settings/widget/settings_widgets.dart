@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invoice_app/config/routes/theme_cubit.dart';
+import 'package:invoice_app/config/themes/cubit/theme_cubit.dart';
 
 Widget buildSectionHeader(BuildContext context, String title) {
   return Padding(

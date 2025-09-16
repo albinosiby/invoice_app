@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invoice_app/config/routes/theme_cubit.dart';
+import 'package:invoice_app/config/themes/cubit/theme_cubit.dart';
 import 'package:invoice_app/config/themes/dark_theme.dart';
 import 'package:invoice_app/config/themes/light_theme.dart';
 import 'package:invoice_app/core/mainScreen/screen/mainScreen.dart';

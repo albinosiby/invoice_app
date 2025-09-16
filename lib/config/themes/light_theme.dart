@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'theme_config.dart';
 
 // Define the light theme using constants from ThemeConfig.
@@ -29,6 +30,7 @@ final ThemeData lightTheme = ThemeData(
     backgroundColor: ThemeConfig.lightSurfaceOrCard,
     foregroundColor: ThemeConfig.buttonTextPrimary,
   ),
+
   disabledColor: ThemeConfig.lightSecondaryText,
   scaffoldBackgroundColor: ThemeConfig.lightBackground,
   cardColor: ThemeConfig.lightSurfaceOrCard,
@@ -49,7 +51,7 @@ final ThemeData lightTheme = ThemeData(
       fontFamily: 'Roboto',
       fontWeight: FontWeight.w400,
       fontSize: 24,
-      height: 1.5,
+      height: 1,
     ),
     titleLarge: TextStyle(
       fontFamily: 'Roboto',
@@ -61,7 +63,7 @@ final ThemeData lightTheme = ThemeData(
       fontFamily: 'Roboto',
       fontWeight: FontWeight.w400,
       fontSize: 16,
-      height: 1.5,
+      height: 1,
     ),
     bodySmall: TextStyle(
       fontFamily: 'Roboto',

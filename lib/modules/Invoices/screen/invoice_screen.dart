@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invoice_app/modules/Invoices/cubit/invoice_cubit.dart';
-import 'package:invoice_app/modules/Invoices/model/invoice_model.dart';
-import 'package:invoice_app/modules/Invoices/repository/invoice_repository.dart';
+import 'package:invoice_app/config/themes/theme_config.dart';
+import 'package:invoice_app/constants/app_constants.dart';
 import 'package:invoice_app/modules/Invoices/screen/add_invoice_screen.dart';
 import 'package:invoice_app/modules/Invoices/widget/invoice_widgets.dart';
 import 'package:invoice_app/modules/settings/screen/settings.dart';
-import 'package:invoice_app/config/themes/theme_config.dart';
+import 'package:invoice_app/widgets/widgets.dart';
 
 class InvoicesScreen extends StatefulWidget {
   const InvoicesScreen({super.key});
@@ -17,238 +15,274 @@ class InvoicesScreen extends StatefulWidget {
 
 class _InvoicesScreenState extends State<InvoicesScreen> {
   final TextEditingController _searchController = TextEditingController();
-  late InvoiceCubit _invoiceCubit;
+  String _selectedFilter = 'All';
+  String _searchQuery = '';
 
-  @override
-  void initState() {
-    super.initState();
-    _invoiceCubit = InvoiceCubit(repository: MockInvoiceRepository());
-    _invoiceCubit.loadInvoices();
-  }
+  final List<Map<String, dynamic>> _sampleInvoices = [
+    {
+      'clientName': 'John Doe',
+      'invoiceNumber': 'INV-001',
+      'amount': 100.00,
+      'dueDate': DateTime(2024, 6, 15),
+      'status': 'Pending',
+    },
+    {
+      'clientName': 'Jane Smith',
+      'invoiceNumber': 'INV-002',
+      'amount': 250.50,
+      'dueDate': DateTime(2024, 6, 10),
+      'status': 'Paid',
+    },
+    {
+      'clientName': 'Mike Johnson',
+      'invoiceNumber': 'INV-003',
+      'amount': 75.25,
+      'dueDate': DateTime(2024, 5, 30),
+      'status': 'Overdue',
+    },
+  ];
 
   @override
   void dispose() {
     _searchController.dispose();
-    _invoiceCubit.close();
     super.dispose();
   }
 
   void _handleSearch(String query) {
-    if (query.isEmpty) {
-      _invoiceCubit.loadInvoices();
-    } else {
-      _invoiceCubit.searchInvoices(query);
-    }
+    setState(() {
+      _searchQuery = query;
+    });
   }
 
   void _handleFilter(String filter) {
-    _invoiceCubit.filterInvoicesByStatus(filter);
+    setState(() {
+      _selectedFilter = filter;
+    });
   }
 
-  void _handleRecordPayment(Invoice invoice) {
-    // Update invoice status to paid
-    final updatedInvoice = invoice.copyWith(status: 'Paid');
-    _invoiceCubit.updateInvoice(updatedInvoice);
+  void _handleRecordPayment(int index) {
+    setState(() {
+      _sampleInvoices[index]['status'] = 'Paid';
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return BlocProvider(
-      create: (context) => _invoiceCubit,
-      child: Scaffold(
-        backgroundColor: theme.colorScheme.background,
-        appBar: AppBar(
-          elevation: 0,
-          title: Text(
-            'Invoices',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onBackground,
-            ),
+    return Scaffold(
+      backgroundColor: theme.colorScheme.background,
+      appBar: AppBar(
+        elevation: 2,
+        title: Text(
+          'Invoices',
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+            color: Theme.of(context).colorScheme.onBackground,
           ),
-          actions: [
-            IconButton(
-              icon: Icon(
-                Icons.settings,
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
-              onPressed: () => Navigator.of(
-                context,
-              ).push(MaterialPageRoute(builder: (_) => SettingsPage())),
-            ),
-          ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(left: 22.0, right: 22.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 10),
-              // Search and Filter UI
-              Row(
-                children: [
-                  Expanded(
-                    child: InvoiceSearchField(
-                      controller: _searchController,
-                      onChanged: _handleSearch,
-                    ),
+        actions: [
+          IconButton(
+            icon: Image.asset(
+              theme.brightness == Brightness.dark
+                  ? Iconconstants.settingsWhite
+                  : Iconconstants.settingsBlack,
+              height: 24,
+              width: 24,
+            ),
+            onPressed: () => Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (_) => SettingsPage())),
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 22.0, right: 22.0),
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+            // Search and Filter UI
+            Row(
+              children: [
+                Expanded(
+                  child: InvoiceSearchField(
+                    controller: _searchController,
+                    onChanged: _handleSearch,
                   ),
-                  const SizedBox(width: 8),
-                  IconButton(
+                ),
+                const SizedBox(width: 8),
+                Material(
+                  elevation: 2,
+                  borderRadius: BorderRadius.circular(12),
+                  color: theme.colorScheme.surface,
+                  child: IconButton(
                     onPressed: () {},
-                    icon: const Icon(
-                      Icons.filter_list,
-                      color: ThemeConfig.darkButtonTextDisabled,
+                    icon: Image.asset(
+                      theme.brightness == Brightness.dark
+                          ? Iconconstants.filterWhite
+                          : Iconconstants.filterBlack,
+                      height: 24,
+                      width: 24,
                     ),
                     style: IconButton.styleFrom(
-                      backgroundColor: theme.colorScheme.surface,
+                      backgroundColor: Colors.transparent,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                       padding: const EdgeInsets.all(16),
                     ),
                   ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              // Filter Chips
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  BlocConsumer<InvoiceCubit, InvoiceState>(
-                    listener: (context, state) {},
-                    builder: (context, state) {
-                      final selectedFilter = state is InvoiceLoaded
-                          ? state.selectedFilter
-                          : 'All';
-                      return buildFilterChip(
-                        theme,
-                        label: 'All',
-                        isSelected: selectedFilter == 'All',
-                        onPressed: () => _handleFilter('All'),
-                      );
-                    },
-                  ),
-                  BlocConsumer<InvoiceCubit, InvoiceState>(
-                    listener: (context, state) {},
-                    builder: (context, state) {
-                      final selectedFilter = state is InvoiceLoaded
-                          ? state.selectedFilter
-                          : 'All';
-                      return buildFilterChip(
-                        theme,
-                        label: 'Pending',
-                        isSelected: selectedFilter == 'Pending',
-                        onPressed: () => _handleFilter('Pending'),
-                      );
-                    },
-                  ),
-                  BlocConsumer<InvoiceCubit, InvoiceState>(
-                    listener: (context, state) {},
-                    builder: (context, state) {
-                      final selectedFilter = state is InvoiceLoaded
-                          ? state.selectedFilter
-                          : 'All';
-                      return buildFilterChip(
-                        theme,
-                        label: 'Paid',
-                        isSelected: selectedFilter == 'Paid',
-                        onPressed: () => _handleFilter('Paid'),
-                      );
-                    },
-                  ),
-                  BlocConsumer<InvoiceCubit, InvoiceState>(
-                    listener: (context, state) {},
-                    builder: (context, state) {
-                      final selectedFilter = state is InvoiceLoaded
-                          ? state.selectedFilter
-                          : 'All';
-                      return buildFilterChip(
-                        theme,
-                        label: 'Overdue',
-                        isSelected: selectedFilter == 'Overdue',
-                        onPressed: () => _handleFilter('Overdue'),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              // Invoice List with BlocConsumer
-              Expanded(
-                child: BlocConsumer<InvoiceCubit, InvoiceState>(
-                  listener: (context, state) {
-                    if (state is InvoiceError) {
-                      ScaffoldMessenger.of(
-                        context,
-                      ).showSnackBar(SnackBar(content: Text(state.message)));
-                    }
-                  },
-                  builder: (context, state) {
-                    if (state is InvoiceLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (state is InvoiceError) {
-                      return Center(
-                        child: Text(
-                          state.message,
-                          style: theme.textTheme.bodyMedium,
-                        ),
-                      );
-                    } else if (state is InvoiceLoaded) {
-                      final invoices = state.invoices;
-                      if (invoices.isEmpty) {
-                        return Center(
-                          child: Text(
-                            state.searchQuery.isNotEmpty
-                                ? 'No invoices found for "${state.searchQuery}"'
-                                : 'No invoices found',
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                        );
-                      }
-                      return ListView.builder(
-                        itemCount: invoices.length,
-                        itemBuilder: (context, index) {
-                          final invoice = invoices[index];
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 9.0),
-                            child: invoiceCard(
-                              theme,
-                              invoice,
-                              () => _handleRecordPayment(invoice),
-                              () => () {},
-                            ),
-                          );
-                        },
-                      );
-                    } else {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                  },
                 ),
-              ),
-            ],
-          ),
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            Navigator.of(
-              context,
-            ).push(MaterialPageRoute(builder: (context) => AddInvoiceScreen()));
-          },
-          label: Text(
-            'Create Invoice',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: ThemeConfig.buttonTextPrimary,
+              ],
             ),
-          ),
-          icon: const Icon(
-            Icons.add_chart,
+            const SizedBox(height: 16),
+            // Filter Chips
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                buildFilterChip(
+                  'All',
+                  _selectedFilter == 'All',
+                  () => _handleFilter('All'),
+                  context,
+                ),
+                buildFilterChip(
+                  'Pending',
+                  _selectedFilter == 'Pending',
+                  () => _handleFilter('Pending'),
+                  context,
+                ),
+                buildFilterChip(
+                  'Paid',
+                  _selectedFilter == 'Paid',
+                  () => _handleFilter('Paid'),
+                  context,
+                ),
+                buildFilterChip(
+                  'Overdue',
+                  _selectedFilter == 'Overdue',
+                  () => _handleFilter('Overdue'),
+                  context,
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            // Invoice List
+            Expanded(child: _buildInvoiceList(theme)),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (_) => const AddInvoiceScreen()));
+        },
+        label: Text(
+          'Create Invoice',
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
             color: ThemeConfig.buttonTextPrimary,
           ),
-          backgroundColor: theme.colorScheme.primary,
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        icon: Image.asset(Iconconstants.addInvoiceWhite, height: 24, width: 24),
+        backgroundColor: theme.colorScheme.primary,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+    );
+  }
+
+  Widget _buildInvoiceList(ThemeData theme) {
+    final filteredInvoices = _sampleInvoices.where((invoice) {
+      final matchesSearch =
+          _searchQuery.isEmpty ||
+          invoice['clientName'].toString().toLowerCase().contains(
+            _searchQuery.toLowerCase(),
+          ) ||
+          invoice['invoiceNumber'].toString().toLowerCase().contains(
+            _searchQuery.toLowerCase(),
+          );
+
+      final matchesFilter =
+          _selectedFilter == 'All' ||
+          invoice['status'].toString().toLowerCase() ==
+              _selectedFilter.toLowerCase();
+
+      return matchesSearch && matchesFilter;
+    }).toList();
+
+    if (filteredInvoices.isEmpty) {
+      return Center(
+        child: Text(
+          _searchQuery.isNotEmpty
+              ? 'No invoices found for "$_searchQuery"'
+              : 'No invoices found',
+          style: theme.textTheme.bodyMedium,
+        ),
+      );
+    }
+
+    return ListView.builder(
+      itemCount: filteredInvoices.length,
+      itemBuilder: (context, index) {
+        final invoice = filteredInvoices[index];
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 9.0),
+          child: buildInvoiceCard(
+            theme,
+            invoice['clientName'],
+            invoice['invoiceNumber'],
+            invoice['amount'],
+            invoice['dueDate'],
+            invoice['status'],
+            () => _handleRecordPayment(
+              _sampleInvoices.indexWhere(
+                (inv) => inv['invoiceNumber'] == invoice['invoiceNumber'],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class InvoiceSearchField extends StatelessWidget {
+  final TextEditingController controller;
+  final ValueChanged<String> onChanged;
+
+  const InvoiceSearchField({
+    super.key,
+    required this.controller,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Material(
+      elevation: 2,
+      borderRadius: BorderRadius.circular(12),
+      child: TextField(
+        controller: controller,
+        style: TextStyle(color: theme.colorScheme.onBackground),
+        decoration: InputDecoration(
+          hintText: 'Search Invoices',
+          hintStyle: TextStyle(
+            fontStyle: theme.textTheme.bodySmall?.fontStyle,
+            color: ThemeConfig.darkButtonTextDisabled,
+          ),
+          prefixIcon: const Icon(
+            Icons.search,
+            color: ThemeConfig.darkButtonTextDisabled,
+          ),
+          fillColor: theme.colorScheme.surface,
+          filled: true,
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+            borderSide: BorderSide.none,
+          ),
+        ),
+        onChanged: onChanged,
       ),
     );
   }

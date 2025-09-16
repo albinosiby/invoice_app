@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:invoice_app/config/themes/theme_config.dart';
+import 'package:invoice_app/constants/app_constants.dart';
 import 'package:invoice_app/modules/Clients/screen/add_client.dart';
+import 'package:invoice_app/modules/Estimates/widget/add_estimate_widget.dart';
 import 'package:invoice_app/modules/settings/screen/settings.dart';
 
 class AddEstimateScreen extends StatefulWidget {
@@ -11,20 +12,23 @@ class AddEstimateScreen extends StatefulWidget {
 }
 
 class _AddEstimateScreenState extends State<AddEstimateScreen> {
-  // State variables for the switches
-  bool _markAsPaid = false;
   bool _acceptCardPayments = false;
   bool _requestSignature = false;
+  final TextEditingController notesController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Scaffold(
-      // Using a dark theme as a base
       backgroundColor: theme.colorScheme.background,
       appBar: AppBar(
         elevation: 0,
+        backgroundColor: theme.colorScheme.background,
+        leading: IconButton(
+          icon: Icon(Icons.chevron_left, color: theme.colorScheme.onBackground),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: Text(
           'Add Invoice',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -33,9 +37,12 @@ class _AddEstimateScreenState extends State<AddEstimateScreen> {
         ),
         actions: [
           IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Theme.of(context).colorScheme.onBackground,
+            icon: Image.asset(
+              theme.brightness == Brightness.dark
+                  ? Iconconstants.settingsWhite
+                  : Iconconstants.settingsBlack,
+              height: 24,
+              width: 24,
             ),
             onPressed: () => Navigator.of(
               context,
@@ -49,462 +56,216 @@ class _AddEstimateScreenState extends State<AddEstimateScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 16),
-            Row(
-              children: [
-                Text(
-                  'INV00001',
-                  style: theme.textTheme.headlineSmall?.copyWith(
-                    color: theme.colorScheme.onBackground,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Icon(
-                  Icons.edit,
-                  color: theme.colorScheme.onBackground,
-                  size: 24,
-                ),
-              ],
-            ),
-            Text(
-              'June 12, 2024',
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onBackground,
-              ),
-            ),
+
+            // Header Section
+            buildHeaderSection(theme),
             const SizedBox(height: 16),
 
             // Client Section
-            Text(
-              'Client',
-              style: theme.textTheme.headlineSmall?.copyWith(
-                color: theme.colorScheme.onBackground,
-              ),
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              width: 352,
-              height: 52,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AddClientScreen(),
-                    ),
-                  );
-                },
-
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.person_add_alt_1, color: Colors.white),
-                    const SizedBox(width: 8),
-                    Text(
-                      'Add Client',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            buildClientSection(theme),
             const SizedBox(height: 16),
 
-            Text(
-              'Items',
-              style: theme.textTheme.headlineSmall?.copyWith(
-                color: theme.colorScheme.onBackground,
-              ),
-            ),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Item 1',
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        color: theme.colorScheme.onBackground,
-                      ),
-                    ),
-                    Text(
-                      '1*₹100.00',
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        color: ThemeConfig.darkSecondaryText,
-                      ),
-                    ),
-                  ],
-                ),
-                Text(
-                  '₹100.00',
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    color: theme.colorScheme.onBackground,
-                  ),
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 16),
-
-            SizedBox(
-              width: 356,
-              height: 52,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-                onPressed: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.add_circle_outline, color: Colors.white),
-                    const SizedBox(width: 8),
-                    Text(
-                      'Add Item',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                children: [
-                  Text(
-                    'Subtotal',
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      color: theme.colorScheme.onBackground,
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    '₹100.00',
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      color: theme.colorScheme.onBackground,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Items Section
+            buildItemsSection(theme),
             const SizedBox(height: 16),
 
             // Pricing Summary
-            Text(
-              'Pricing Summary',
-              style: theme.textTheme.headlineSmall?.copyWith(
-                color: theme.colorScheme.onBackground,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                children: [
-                  Icon(Icons.add_circle_outline, color: Colors.blue, size: 20),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Discount',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      color: ThemeConfig.darkPrimaryAccent,
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    '₹0.00',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      color: theme.colorScheme.onBackground,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                children: [
-                  Icon(Icons.add_circle_outline, color: Colors.blue, size: 20),
-                  const SizedBox(width: 8),
-                  Text(
-                    'GST(18%)',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      color: ThemeConfig.darkPrimaryAccent,
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    '₹18.00',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      color: theme.colorScheme.onBackground,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                children: [
-                  Text(
-                    'Total',
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      color: theme.colorScheme.onBackground,
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    '₹118.00',
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      color: theme.colorScheme.onBackground,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            buildPricingSummary(theme),
             const SizedBox(height: 16),
+
             // Payment Options
-            Text(
-              'Payment Options',
-              style: theme.textTheme.headlineSmall?.copyWith(
-                color: theme.colorScheme.onBackground,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.credit_card,
-                    color: theme.colorScheme.onBackground,
-                    size: 20,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Card Payments',
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.colorScheme.onBackground,
-                    ),
-                  ),
-                  const Spacer(),
-                  Switch(
-                    activeColor: ThemeConfig.buttonTextPrimary,
-                    activeTrackColor: ThemeConfig.lightButtonTextDisabled,
-                    inactiveThumbColor: ThemeConfig.buttonTextPrimary,
-                    inactiveTrackColor: ThemeConfig.lightButtonTextDisabled,
-                    trackOutlineColor: MaterialStateProperty.all(
-                      ThemeConfig.lightButtonTextDisabled,
-                    ),
-                    value: _acceptCardPayments,
-                    onChanged: (value) =>
-                        setState(() => _acceptCardPayments = value),
-                  ),
-                ],
-              ),
-            ),
-
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: Icon(
-                Icons.account_balance,
-                color: theme.colorScheme.onBackground,
-              ),
-              title: Text(
-                'Bank Account & Payment Info',
-                style: TextStyle(color: theme.colorScheme.onBackground),
-              ),
-              trailing: Icon(
-                Icons.chevron_right,
-                color: theme.colorScheme.onBackground,
-              ),
-              onTap: () {},
-            ),
-
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: Icon(
-                Icons.receipt_long,
-                color: theme.colorScheme.onBackground,
-              ),
-              title: Text(
-                'Deposit Request',
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: theme.colorScheme.onBackground,
-                ),
-              ),
-              trailing: Icon(
-                Icons.chevron_right,
-                color: theme.colorScheme.onBackground,
-              ),
-              onTap: () {},
-            ),
-
+            buildPaymentOptions(theme),
             const SizedBox(height: 16),
 
             // Attachments
-            Text(
-              'Attachments',
-              style: theme.textTheme.headlineSmall?.copyWith(
-                color: theme.colorScheme.onBackground,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                children: [
-                  Icon(Icons.image, color: Colors.blue, size: 20),
-                  const SizedBox(width: 8),
-
-                  Text(
-                    'Add Image',
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: ThemeConfig.darkPrimaryAccent,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                children: [
-                  Icon(Icons.picture_as_pdf, color: Colors.blue, size: 20),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Add PDF',
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: ThemeConfig.darkPrimaryAccent,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
+            buildAttachmentsSection(theme),
             const SizedBox(height: 16),
 
             // Client Acceptance
+            buildClientAcceptance(theme),
+            const SizedBox(height: 10),
+
+            // Notes
+            buildTextField(
+              controller: notesController,
+              label: 'Notes',
+              hint: 'Add notes',
+              keyboardType: TextInputType.multiline,
+              maxLines: 8,
+              context: context,
+            ),
+            const SizedBox(height: 20),
+
+            // Action Buttons
+            buildActionButtons(context),
+            const SizedBox(height: 60),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildHeaderSection(ThemeData theme) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
             Text(
-              'Client Acceptance',
+              'INV00001',
               style: theme.textTheme.headlineSmall?.copyWith(
                 color: theme.colorScheme.onBackground,
               ),
             ),
+            const SizedBox(width: 16),
+            Icon(Icons.edit, color: theme.colorScheme.onBackground, size: 24),
+          ],
+        ),
+        Text(
+          'June 12, 2024',
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: theme.colorScheme.onBackground,
+          ),
+        ),
+      ],
+    );
+  }
 
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.draw,
-                    color: theme.colorScheme.onBackground,
-                    size: 20,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Request Sign & Acceptance',
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.colorScheme.onBackground,
-                    ),
-                  ),
-                  const Spacer(),
-                  Switch(
-                    activeColor: ThemeConfig.buttonTextPrimary,
-                    activeTrackColor: ThemeConfig.lightButtonTextDisabled,
-                    inactiveThumbColor: ThemeConfig.buttonTextPrimary,
-                    inactiveTrackColor: ThemeConfig.lightButtonTextDisabled,
-                    trackOutlineColor: MaterialStateProperty.all(
-                      ThemeConfig.lightButtonTextDisabled,
-                    ),
-                    value: _requestSignature,
-                    onChanged: (value) =>
-                        setState(() => _requestSignature = value),
-                  ),
-                ],
+  // Widget: Client Section
+  Widget buildClientSection(ThemeData theme) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Client',
+          style: theme.textTheme.headlineSmall?.copyWith(
+            color: theme.colorScheme.onBackground,
+          ),
+        ),
+        const SizedBox(height: 8),
+        SizedBox(
+          width: 352,
+          height: 52,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: theme.colorScheme.primary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
               ),
             ),
-            const SizedBox(height: 10),
-            // Notes
-            Text(
-              'Notes',
-              style: theme.textTheme.bodyLarge?.copyWith(
-                color: theme.colorScheme.onBackground,
-              ),
-            ),
-            TextField(
-              maxLines: 5,
-              style: TextStyle(color: theme.colorScheme.onBackground),
-              decoration: InputDecoration(
-                hintText: 'Notes',
-                hintStyle: TextStyle(color: ThemeConfig.darkPlaceholderText),
-                border: OutlineInputBorder(),
-                fillColor: ThemeConfig.darkSurfaceOrCard,
-              ),
-            ),
-            // Extra space to scroll past bottom bar
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            onPressed: () => Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (_) => AddClientScreen())),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  width: 169,
-                  height: 52,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: ThemeConfig.lightButtonTextDisabled,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    child: Text(
-                      'Preview',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: ThemeConfig.darkBackground,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 169,
-                  height: 52,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    child: Text(
-                      'Save',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: ThemeConfig.lightBackground,
-                      ),
-                    ),
+                Icon(Icons.person_add_alt_1, color: Colors.white),
+                const SizedBox(width: 8),
+                Text(
+                  'Add Client',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: theme.colorScheme.onPrimary,
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 60),
-          ],
+          ),
         ),
-      ),
+      ],
+    );
+  }
+
+  // Widget: Pricing Summary
+  Widget buildPricingSummary(ThemeData theme) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Pricing Summary',
+          style: theme.textTheme.headlineSmall?.copyWith(
+            color: theme.colorScheme.onBackground,
+          ),
+        ),
+        const SizedBox(height: 10),
+        buildPricingRow(Iconconstants.plusBoxWhite, 'Discount', '₹0.00', theme),
+        buildPricingRow(
+          Iconconstants.plusBoxWhite,
+          'GST(18%)',
+          '₹18.00',
+          theme,
+        ),
+        buildPriceRow('Total', '₹118.00', theme, isTotal: true),
+      ],
+    );
+  }
+
+  Widget buildPaymentOptions(ThemeData theme) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Payment Options',
+          style: theme.textTheme.headlineSmall?.copyWith(
+            color: theme.colorScheme.onBackground,
+          ),
+        ),
+        buildSwitchOption(
+          theme.brightness == Brightness.dark
+              ? Iconconstants.cardWhite
+              : Iconconstants.cardBlack,
+          'Card Payments',
+          _acceptCardPayments,
+          (value) => setState(() => _acceptCardPayments = value),
+          theme,
+        ),
+        buildListTileOption(
+          Icons.account_balance,
+          'Bank Account & Payment Info',
+          theme,
+        ),
+        buildListTileOption(Icons.receipt_long, 'Deposit Request', theme),
+      ],
+    );
+  }
+
+  // Widget: Attachments Section
+  Widget buildAttachmentsSection(ThemeData theme) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Attachments',
+          style: theme.textTheme.headlineSmall?.copyWith(
+            color: theme.colorScheme.onBackground,
+          ),
+        ),
+        buildAttachmentOption(Icons.image, 'Add Image', theme),
+        buildAttachmentOption(Icons.picture_as_pdf, 'Add PDF', theme),
+      ],
+    );
+  }
+
+  Widget buildClientAcceptance(ThemeData theme) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Client Acceptance',
+          style: theme.textTheme.headlineSmall?.copyWith(
+            color: theme.colorScheme.onBackground,
+          ),
+        ),
+        buildSwitchOption(
+          theme.brightness == Brightness.dark
+              ? Iconconstants.signWhite
+              : Iconconstants.signBlack,
+
+          'Request Sign & Acceptance',
+          _requestSignature,
+          (value) => setState(() => _requestSignature = value),
+          theme,
+        ),
+      ],
     );
   }
 }

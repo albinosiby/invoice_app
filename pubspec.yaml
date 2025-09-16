@@ -43,11 +43,17 @@ dependencies:
   shared_preferences: ^2.5.3
   cached_network_image: ^3.4.1
   intl: ^0.20.2
+  fl_chart: ^0.66.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.13.1"
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo.png"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -71,8 +77,31 @@ flutter:
     - assets/images/onboardingLight.png
     - assets/images/onboardingDark.png
 
+    - assets/icons/filter_black.png
+    - assets/icons/filter_white.png
+    - assets/icons/settings_black.png
+    - assets/icons/settings_white.png
+    - assets/icons/add_person_white.png
+    - assets/icons/plus_box_white.png
+    - assets/icons/Add_invoice_white.png
+    - assets/icons/Add_invoice_black.png
+    - assets/icons/nav_client.png
+    - assets/icons/nav_invoice.png
+    - assets/icons/nav-client_selected.png
+    - assets/icons/nav_invoice_selected.png
+    - assets/icons/nav_estimate.png
+    - assets/icons/nav_estimate_selected.png
+    - assets/icons/nav_home.png
+    - assets/icons/nav_home_selected.png
+    - assets/icons/nav_report.png
+    - assets/icons/nav_report_selected.png
+    - assets/icons/sign_white.png
+    - assets/icons/sign_black.png
+    - assets/icons/card.png
+    - assets/icons/card_black.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
+
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/to/asset-from-package
