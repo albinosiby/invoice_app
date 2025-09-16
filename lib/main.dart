@@ -24,14 +24,13 @@ class MyApp extends StatelessWidget {
       create: (context) => ThemeCubit(),
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
-          // The MaterialApp rebuilds whenever the ThemeState changes.
           return MaterialApp(
             title: 'Invoice app',
             debugShowCheckedModeBanner: false,
             theme: lightTheme,
             darkTheme: darkTheme,
             themeMode: state.themeMode, // Set themeMode from the cubit's state
-            home: Firstscreen(),
+            home: Mainscreen(),
           );
         },
       ),

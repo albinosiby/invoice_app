@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:invoice_app/config/themes/theme_config.dart';
+import 'package:invoice_app/constants/app_constants.dart';
 import 'package:invoice_app/modules/Reports/widget/report_widget.dart';
 import 'package:invoice_app/modules/settings/screen/settings.dart';
 
@@ -37,7 +38,7 @@ class _ReportScreenState extends State<ReportScreen> {
 
   // Chart-related state
   LineChartData chartData = LineChartData();
-  List<FlSpot> flspots = [FlSpot(0, 0)];
+  List<FlSpot> flspots = [];
   List<Color> gradientColors = [
     const Color(0xff23b6e6),
     const Color(0xff02d39a),
@@ -46,8 +47,7 @@ class _ReportScreenState extends State<ReportScreen> {
   @override
   void initState() {
     super.initState();
-    setChartData();
-    startCreatingDemoData();
+    _generateChartData();
   }
 
   @override
@@ -56,40 +56,50 @@ class _ReportScreenState extends State<ReportScreen> {
     super.dispose();
   }
 
-  void startCreatingDemoData() async {
-    for (int i = 0; i < 12; i++) {
-      if (i == 0) continue;
-      await Future.delayed((Duration(seconds: 1))).then((value) {
-        Random random = Random();
-        setState(() {
-          flspots.add(
-            FlSpot(double.parse(i.toString()), random.nextDouble() * 6),
-          );
-          setChartData();
-        });
-      });
-    }
+  void _generateChartData() {
+    // Generate random data points for the chart
+    Random random = Random();
+    flspots = List.generate(12, (index) {
+      return FlSpot(index.toDouble(), random.nextDouble() * 6);
+    });
+
+    _setChartData();
   }
 
-  void setChartData() {
+  void _setChartData() {
+    // Different gradient colors based on selected filter
+    List<Color> currentGradientColors;
+    switch (_selectedFilter) {
+      case 'Expenses':
+        currentGradientColors = [
+          const Color(0xffff6b6b),
+          const Color(0xffff9e6b),
+        ];
+        break;
+      case 'Balance':
+        currentGradientColors = [
+          const Color(0xffa29bfe),
+          const Color(0xff6c5ce7),
+        ];
+        break;
+      case 'Invoices':
+      default:
+        currentGradientColors = [
+          const Color(0xff23b6e6),
+          const Color(0xff02d39a),
+        ];
+    }
+
     chartData = LineChartData(
-      gridData: FlGridData(
-        drawVerticalLine: true,
-        getDrawingHorizontalLine: (value) {
-          return FlLine(color: const Color(0xff37434d), strokeWidth: 1);
-        },
-        getDrawingVerticalLine: (value) {
-          return FlLine(color: const Color(0xff37434d), strokeWidth: 1);
-        },
-      ),
+      gridData: FlGridData(show: false),
       titlesData: FlTitlesData(
-        // show: true,
+        show: true,
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
             reservedSize: 22,
             getTitlesWidget: (value, meta) => Text(
-              meta.formattedValue,
+              '${value.toInt() + 1}',
               style: TextStyle(
                 color: ThemeConfig.darkButtonTextDisabled,
                 fontWeight: FontWeight.bold,
@@ -102,7 +112,7 @@ class _ReportScreenState extends State<ReportScreen> {
           sideTitles: SideTitles(
             showTitles: true,
             getTitlesWidget: (value, meta) => Text(
-              meta.formattedValue,
+              '${value.toInt()}',
               style: TextStyle(
                 color: ThemeConfig.darkButtonTextDisabled,
                 fontWeight: FontWeight.bold,
@@ -117,10 +127,7 @@ class _ReportScreenState extends State<ReportScreen> {
         ),
         topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
       ),
-      borderData: FlBorderData(
-        show: true,
-        border: Border.all(color: const Color(0xff37434d), width: 1),
-      ),
+      borderData: FlBorderData(show: false),
       minX: 0,
       maxX: 11,
       minY: 0,
@@ -129,14 +136,14 @@ class _ReportScreenState extends State<ReportScreen> {
         LineChartBarData(
           spots: flspots,
           isCurved: true,
-          gradient: LinearGradient(colors: gradientColors),
+          gradient: LinearGradient(colors: currentGradientColors),
           barWidth: 3,
           isStrokeCapRound: true,
           dotData: const FlDotData(show: false),
           belowBarData: BarAreaData(
             show: true,
             gradient: LinearGradient(
-              colors: gradientColors
+              colors: currentGradientColors
                   .map((color) => color.withOpacity(0.2))
                   .toList(),
             ),
@@ -155,6 +162,8 @@ class _ReportScreenState extends State<ReportScreen> {
   void _handleFilter(String filter) {
     setState(() {
       _selectedFilter = filter;
+      // Generate new chart data for the selected filter
+      _generateChartData();
     });
   }
 
@@ -163,22 +172,27 @@ class _ReportScreenState extends State<ReportScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface,
+      backgroundColor: theme.colorScheme.background,
       appBar: AppBar(
         elevation: 0,
         title: Text(
           'Reports',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
+            color: Theme.of(context).colorScheme.onBackground,
           ),
         ),
         actions: [
           IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Theme.of(context).colorScheme.onSurface,
+            icon: Image.asset(
+              theme.brightness == Brightness.dark
+                  ? Iconconstants.settingsWhite
+                  : Iconconstants.settingsBlack,
+              height: 24,
+              width: 24,
             ),
-            onPressed: () {},
+            onPressed: () => Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (_) => SettingsPage())),
           ),
         ],
       ),
@@ -189,11 +203,11 @@ class _ReportScreenState extends State<ReportScreen> {
             const SizedBox(height: 10),
             // Search Field
             _buildSearchField(theme),
-            const SizedBox(height: 16),
+            const SizedBox(height: 10),
 
             // Filter Chips
             _buildFilterChips(theme),
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
 
             // Dropdown Filters
             _buildDropdownFilters(theme),
@@ -201,6 +215,7 @@ class _ReportScreenState extends State<ReportScreen> {
 
             // Report Content based on selected filter
             _buildReportContent(theme),
+            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -214,7 +229,7 @@ class _ReportScreenState extends State<ReportScreen> {
       color: theme.colorScheme.surface,
       child: TextField(
         controller: _searchController,
-        style: TextStyle(color: theme.colorScheme.onSurface),
+        style: TextStyle(color: theme.colorScheme.onBackground),
         decoration: InputDecoration(
           hintText: 'Search Reports',
           hintStyle: TextStyle(color: ThemeConfig.darkButtonTextDisabled),
@@ -274,7 +289,7 @@ class _ReportScreenState extends State<ReportScreen> {
   ) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        minimumSize: const Size(84, 38),
+        minimumSize: const Size(110, 42),
         padding: const EdgeInsets.fromLTRB(8, 10, 8, 10),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
