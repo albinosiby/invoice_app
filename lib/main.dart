@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             theme: lightTheme,
             darkTheme: darkTheme,
             themeMode: state.themeMode, // Set themeMode from the cubit's state
-            home: Mainscreen(),
+            home: Firstscreen(),
           );
         },
       ),
