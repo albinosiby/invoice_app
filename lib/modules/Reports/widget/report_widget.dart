@@ -12,7 +12,7 @@ Widget buildDropdown(
       color: theme.colorScheme.surface,
       borderRadius: BorderRadius.circular(8),
       border: Border.all(
-        color: theme.colorScheme.onBackground.withOpacity(0.2),
+        color: theme.colorScheme.onSurface.withOpacity(0.2),
         width: 1,
       ),
     ),
@@ -21,7 +21,7 @@ Widget buildDropdown(
       isExpanded: true,
       icon: Icon(
         Icons.unfold_more,
-        color: theme.colorScheme.onBackground.withOpacity(0.6),
+        color: theme.colorScheme.onSurface.withOpacity(0.6),
       ),
       underline: const SizedBox(),
       items: items.map((String item) {
@@ -74,7 +74,7 @@ Widget buildReportCard(
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.bodyLarge?.copyWith(
-                        color: theme.colorScheme.onBackground,
+                        color: theme.colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: 3),
@@ -83,7 +83,7 @@ Widget buildReportCard(
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.headlineSmall?.copyWith(
-                        color: theme.colorScheme.onBackground,
+                        color: theme.colorScheme.onSurface,
                       ),
                     ),
                   ],
@@ -91,7 +91,7 @@ Widget buildReportCard(
               ),
               Icon(
                 Icons.arrow_forward_ios,
-                color: theme.colorScheme.onBackground,
+                color: theme.colorScheme.onSurface,
                 size: 16,
               ),
             ],
@@ -136,7 +136,7 @@ Widget buildExpandedReportCard(
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.bodyLarge?.copyWith(
-                        color: theme.colorScheme.onBackground,
+                        color: theme.colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: 3),
@@ -145,7 +145,7 @@ Widget buildExpandedReportCard(
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.headlineSmall?.copyWith(
-                        color: theme.colorScheme.onBackground,
+                        color: theme.colorScheme.onSurface,
                       ),
                     ),
                   ],
@@ -153,7 +153,7 @@ Widget buildExpandedReportCard(
               ),
               Icon(
                 Icons.arrow_forward_ios,
-                color: theme.colorScheme.onBackground,
+                color: theme.colorScheme.onSurface,
                 size: 16,
               ),
             ],

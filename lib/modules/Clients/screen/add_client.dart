@@ -75,18 +75,18 @@ class _AddClientScreenState extends State<AddClientScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.background,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: theme.appBarTheme.backgroundColor,
         leading: IconButton(
-          icon: Icon(Icons.chevron_left, color: theme.colorScheme.onBackground),
+          icon: Icon(Icons.chevron_left, color: theme.colorScheme.onSurface),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
           'Add Client',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onBackground,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         actions: [

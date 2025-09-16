@@ -163,20 +163,20 @@ class _ReportScreenState extends State<ReportScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.background,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         elevation: 0,
         title: Text(
           'Reports',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onBackground,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         actions: [
           IconButton(
             icon: Icon(
               Icons.settings,
-              color: Theme.of(context).colorScheme.onBackground,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
             onPressed: () {},
           ),
@@ -214,7 +214,7 @@ class _ReportScreenState extends State<ReportScreen> {
       color: theme.colorScheme.surface,
       child: TextField(
         controller: _searchController,
-        style: TextStyle(color: theme.colorScheme.onBackground),
+        style: TextStyle(color: theme.colorScheme.onSurface),
         decoration: InputDecoration(
           hintText: 'Search Reports',
           hintStyle: TextStyle(color: ThemeConfig.darkButtonTextDisabled),

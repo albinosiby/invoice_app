@@ -44,7 +44,7 @@ class LoginScreen extends StatelessWidget {
                   child: Text(
                     'Login to your invoice_app account',
                     style: theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.colorScheme.onBackground,
+                      color: theme.colorScheme.onSurface,
                     ),
                   ),
                 ),

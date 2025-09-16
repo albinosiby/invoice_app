@@ -78,7 +78,7 @@ class _HomeScreenBody extends StatelessWidget {
               IconButton(
                 icon: Icon(
                   Icons.search,
-                  color: Theme.of(context).colorScheme.onBackground,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
                 onPressed: () {},
               ),

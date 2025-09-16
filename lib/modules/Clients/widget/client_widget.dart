@@ -13,7 +13,7 @@ Widget buildClientCard(Map<String, dynamic> client, BuildContext context) {
         backgroundColor: const Color.fromRGBO(96, 165, 250, 0.25),
         child: Text(
           client['companyName'][0].toUpperCase(),
-          style: TextStyle(color: theme.colorScheme.onBackground),
+          style: TextStyle(color: theme.colorScheme.onSurface),
         ),
       ),
       title: Text(
@@ -36,7 +36,7 @@ Widget buildClientCard(Map<String, dynamic> client, BuildContext context) {
       trailing: IconButton(
         icon: Icon(
           Icons.chevron_right,
-          color: Theme.of(context).colorScheme.onBackground,
+          color: Theme.of(context).colorScheme.onSurface,
         ),
         onPressed: () {},
       ),

@@ -52,14 +52,14 @@ class _SettingsView extends StatelessWidget {
             leading: IconButton(
               icon: Icon(
                 Icons.chevron_left,
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
               onPressed: () => Navigator.of(context).pop(),
             ),
             title: Text(
               'Settings',
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
           ),

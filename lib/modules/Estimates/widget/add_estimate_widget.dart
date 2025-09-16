@@ -9,7 +9,7 @@ Widget buildItemsSection(ThemeData theme) {
       Text(
         'Items',
         style: theme.textTheme.headlineSmall?.copyWith(
-          color: theme.colorScheme.onBackground,
+          color: theme.colorScheme.onSurface,
         ),
       ),
       const SizedBox(height: 16),
@@ -102,7 +102,7 @@ Widget buildItemRow(
           Text(
             itemName,
             style: theme.textTheme.bodyLarge?.copyWith(
-              color: theme.colorScheme.onBackground,
+              color: theme.colorScheme.onSurface,
             ),
           ),
           Text(
@@ -116,7 +116,7 @@ Widget buildItemRow(
       Text(
         price,
         style: theme.textTheme.bodyLarge?.copyWith(
-          color: theme.colorScheme.onBackground,
+          color: theme.colorScheme.onSurface,
         ),
       ),
     ],
@@ -146,7 +146,7 @@ Widget buildPricingRow(icon, String label, String value, ThemeData theme) {
         Text(
           value,
           style: theme.textTheme.titleSmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
       ],
@@ -169,10 +169,10 @@ Widget buildPriceRow(
           label,
           style: isTotal
               ? theme.textTheme.titleLarge?.copyWith(
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                 )
               : theme.textTheme.titleLarge?.copyWith(
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                 ),
         ),
         const Spacer(),
@@ -180,10 +180,10 @@ Widget buildPriceRow(
           value,
           style: isTotal
               ? theme.textTheme.titleLarge?.copyWith(
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                 )
               : theme.textTheme.titleLarge?.copyWith(
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                 ),
         ),
       ],
@@ -205,7 +205,7 @@ Widget buildSwitchOption(
       children: [
         Image.asset(
           name,
-          color: theme.colorScheme.onBackground,
+          color: theme.colorScheme.onSurface,
           width: 24,
           height: 24,
         ),
@@ -213,7 +213,7 @@ Widget buildSwitchOption(
         Text(
           title,
           style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         const Spacer(),
@@ -222,7 +222,7 @@ Widget buildSwitchOption(
           activeTrackColor: ThemeConfig.lightButtonTextDisabled,
           inactiveThumbColor: ThemeConfig.buttonTextPrimary,
           inactiveTrackColor: ThemeConfig.lightButtonTextDisabled,
-          trackOutlineColor: MaterialStateProperty.all(
+          trackOutlineColor: WidgetStateProperty.all(
             ThemeConfig.lightButtonTextDisabled,
           ),
           value: value,
@@ -237,14 +237,14 @@ Widget buildSwitchOption(
 Widget buildListTileOption(IconData icon, String title, ThemeData theme) {
   return ListTile(
     contentPadding: EdgeInsets.zero,
-    leading: Icon(icon, color: theme.colorScheme.onBackground),
+    leading: Icon(icon, color: theme.colorScheme.onSurface),
     title: Text(
       title,
       style: theme.textTheme.bodyLarge?.copyWith(
-        color: theme.colorScheme.onBackground,
+        color: theme.colorScheme.onSurface,
       ),
     ),
-    trailing: Icon(Icons.chevron_right, color: theme.colorScheme.onBackground),
+    trailing: Icon(Icons.chevron_right, color: theme.colorScheme.onSurface),
     onTap: () {},
   );
 }
@@ -276,12 +276,12 @@ Widget buildNotesSection(ThemeData theme) {
       Text(
         'Notes',
         style: theme.textTheme.bodyLarge?.copyWith(
-          color: theme.colorScheme.onBackground,
+          color: theme.colorScheme.onSurface,
         ),
       ),
       TextField(
         maxLines: 5,
-        style: TextStyle(color: theme.colorScheme.onBackground),
+        style: TextStyle(color: theme.colorScheme.onSurface),
         decoration: InputDecoration(
           hintText: 'Notes',
           hintStyle: TextStyle(color: ThemeConfig.darkPlaceholderText),

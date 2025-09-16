@@ -18,7 +18,6 @@ final ThemeData lightTheme = ThemeData(
     900: ThemeConfig.lightPrimaryAccent,
   }),
   colorScheme: ColorScheme.light(
-    background: ThemeConfig.lightBackground,
     onBackground: ThemeConfig.lightPrimaryText,
     primary: ThemeConfig.lightPrimaryAccent,
     onPrimary: ThemeConfig.buttonTextPrimary,

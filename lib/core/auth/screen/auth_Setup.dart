@@ -35,7 +35,7 @@ class AuthSetup extends StatelessWidget {
                   child: Text(
                     'Set up your Invoice account',
                     style: theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.colorScheme.onBackground,
+                      color: theme.colorScheme.onSurface,
                     ),
                   ),
                 ),

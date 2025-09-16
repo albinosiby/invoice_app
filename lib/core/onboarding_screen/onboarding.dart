@@ -59,7 +59,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               Text(
                 AppConstants.onboardingTexts[currentStep],
                 style: theme.textTheme.headlineSmall?.copyWith(
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                 ),
                 textAlign: TextAlign.center,
               ),

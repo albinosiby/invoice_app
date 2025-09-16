@@ -34,7 +34,7 @@ class SignUpPage extends StatelessWidget {
                   child: Text(
                     'Set up your invoice_app account',
                     style: theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.colorScheme.onBackground,
+                      color: theme.colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -216,14 +216,14 @@ class SignUpPage extends StatelessWidget {
                         TextSpan(
                           text: 'Terms and conditions',
                           style: theme.textTheme.bodySmall?.copyWith(
-                            color: theme.colorScheme.onBackground,
+                            color: theme.colorScheme.onSurface,
                           ),
                         ),
                         const TextSpan(text: ' you read our '),
                         TextSpan(
                           text: 'Privacy Policy.',
                           style: theme.textTheme.bodySmall?.copyWith(
-                            color: theme.colorScheme.onBackground,
+                            color: theme.colorScheme.onSurface,
                           ),
                         ),
                       ],

@@ -6,7 +6,6 @@ import 'package:invoice_app/config/themes/cubit/theme_cubit.dart';
 import 'package:invoice_app/config/themes/dark_theme.dart';
 import 'package:invoice_app/config/themes/light_theme.dart';
 import 'package:invoice_app/core/mainScreen/screen/mainScreen.dart';
-import 'package:invoice_app/core/onboarding_screen/firstScreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

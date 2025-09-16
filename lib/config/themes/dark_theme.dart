@@ -17,7 +17,6 @@ final ThemeData darkTheme = ThemeData(
     900: ThemeConfig.darkPrimaryAccent,
   }),
   colorScheme: ColorScheme.dark(
-    background: ThemeConfig.darkBackground,
     onBackground: ThemeConfig.darkPrimaryText,
     primary: ThemeConfig.darkPrimaryAccent,
     onPrimary: ThemeConfig.buttonTextPrimary,

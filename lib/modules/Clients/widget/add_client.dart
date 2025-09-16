@@ -30,7 +30,7 @@ Widget buildSectionHeader(String title, context) {
   return Text(
     title,
     style: theme.textTheme.headlineSmall?.copyWith(
-      color: theme.colorScheme.onBackground,
+      color: theme.colorScheme.onSurface,
     ),
   );
 }

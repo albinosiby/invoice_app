@@ -22,17 +22,17 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.background,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.chevron_left, color: theme.colorScheme.onBackground),
+          icon: Icon(Icons.chevron_left, color: theme.colorScheme.onSurface),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
           'Add Invoice',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onBackground,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         actions: [
@@ -112,17 +112,17 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
             Text(
               'INV00001',
               style: theme.textTheme.headlineSmall?.copyWith(
-                color: theme.colorScheme.onBackground,
+                color: theme.colorScheme.onSurface,
               ),
             ),
             const SizedBox(width: 16),
-            Icon(Icons.edit, color: theme.colorScheme.onBackground, size: 24),
+            Icon(Icons.edit, color: theme.colorScheme.onSurface, size: 24),
           ],
         ),
         Text(
           'June 12, 2024',
           style: theme.textTheme.bodySmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
       ],
@@ -137,7 +137,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         Text(
           'Client',
           style: theme.textTheme.headlineSmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 8),
@@ -181,7 +181,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         Text(
           'Items',
           style: theme.textTheme.headlineSmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 16),
@@ -226,7 +226,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         Text(
           'Pricing Summary',
           style: theme.textTheme.headlineSmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 10),
@@ -250,7 +250,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         Text(
           'Payments',
           style: theme.textTheme.headlineSmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         buildPricingRow(
@@ -281,7 +281,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         Text(
           'Payment Options',
           style: theme.textTheme.headlineSmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         _buildSwitchOption(
@@ -320,7 +320,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           Text(
             title,
             style: theme.textTheme.bodyLarge?.copyWith(
-              color: theme.colorScheme.onBackground,
+              color: theme.colorScheme.onSurface,
             ),
           ),
           const Spacer(),
@@ -329,7 +329,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
             activeTrackColor: ThemeConfig.lightButtonTextDisabled,
             inactiveThumbColor: ThemeConfig.buttonTextPrimary,
             inactiveTrackColor: ThemeConfig.lightButtonTextDisabled,
-            trackOutlineColor: MaterialStateProperty.all(
+            trackOutlineColor: WidgetStateProperty.all(
               ThemeConfig.lightButtonTextDisabled,
             ),
             value: value,
@@ -344,17 +344,14 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
   Widget _buildListTileOption(IconData icon, String title, ThemeData theme) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: Icon(icon, color: theme.colorScheme.onBackground),
+      leading: Icon(icon, color: theme.colorScheme.onSurface),
       title: Text(
         title,
         style: theme.textTheme.bodyLarge?.copyWith(
-          color: theme.colorScheme.onBackground,
+          color: theme.colorScheme.onSurface,
         ),
       ),
-      trailing: Icon(
-        Icons.chevron_right,
-        color: theme.colorScheme.onBackground,
-      ),
+      trailing: Icon(Icons.chevron_right, color: theme.colorScheme.onSurface),
       onTap: () {},
     );
   }
@@ -367,7 +364,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         Text(
           'Attachments',
           style: theme.textTheme.headlineSmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         _buildAttachmentOption(Icons.image, 'Add Image', theme),
@@ -403,7 +400,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         Text(
           'Client Acceptance',
           style: theme.textTheme.headlineSmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         _buildSwitchOption(
@@ -427,12 +424,12 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         Text(
           'Notes',
           style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         TextField(
           maxLines: 5,
-          style: TextStyle(color: theme.colorScheme.onBackground),
+          style: TextStyle(color: theme.colorScheme.onSurface),
           decoration: InputDecoration(
             hintText: 'Notes',
             hintStyle: TextStyle(color: ThemeConfig.darkPlaceholderText),

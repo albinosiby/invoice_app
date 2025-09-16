@@ -108,7 +108,7 @@ Widget buildEstimateCard(
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.more_vert),
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                 ),
               ],
             ),
@@ -125,7 +125,7 @@ Widget buildSearchField(ThemeData theme, searchController, handleSearch) {
     borderRadius: BorderRadius.circular(12),
     child: TextField(
       controller: searchController,
-      style: TextStyle(color: theme.colorScheme.onBackground),
+      style: TextStyle(color: theme.colorScheme.onSurface),
       decoration: InputDecoration(
         hintText: 'Search Estimates',
         hintStyle: TextStyle(

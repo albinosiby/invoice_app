@@ -8,7 +8,7 @@ Widget buildSectionHeader(BuildContext context, String title) {
     child: Text(
       title,
       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-        color: Theme.of(context).colorScheme.onBackground,
+        color: Theme.of(context).colorScheme.onSurface,
       ),
     ),
   );
@@ -16,17 +16,17 @@ Widget buildSectionHeader(BuildContext context, String title) {
 
 Widget buildListTile(BuildContext context, IconData icon, String title, onTap) {
   return ListTile(
-    leading: Icon(icon, color: Theme.of(context).colorScheme.onBackground),
+    leading: Icon(icon, color: Theme.of(context).colorScheme.onSurface),
     title: Text(
       title,
       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-        color: Theme.of(context).colorScheme.onBackground,
+        color: Theme.of(context).colorScheme.onSurface,
       ),
     ),
     trailing: Icon(
       Icons.arrow_forward_ios,
       size: 16.0,
-      color: Theme.of(context).colorScheme.onBackground,
+      color: Theme.of(context).colorScheme.onSurface,
     ),
     onTap: onTap,
   );

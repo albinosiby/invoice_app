@@ -21,18 +21,18 @@ class _AddEstimateScreenState extends State<AddEstimateScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.background,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: theme.colorScheme.background,
+        backgroundColor: theme.colorScheme.surface,
         leading: IconButton(
-          icon: Icon(Icons.chevron_left, color: theme.colorScheme.onBackground),
+          icon: Icon(Icons.chevron_left, color: theme.colorScheme.onSurface),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
           'Add Invoice',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onBackground,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         actions: [
@@ -114,17 +114,17 @@ class _AddEstimateScreenState extends State<AddEstimateScreen> {
             Text(
               'INV00001',
               style: theme.textTheme.headlineSmall?.copyWith(
-                color: theme.colorScheme.onBackground,
+                color: theme.colorScheme.onSurface,
               ),
             ),
             const SizedBox(width: 16),
-            Icon(Icons.edit, color: theme.colorScheme.onBackground, size: 24),
+            Icon(Icons.edit, color: theme.colorScheme.onSurface, size: 24),
           ],
         ),
         Text(
           'June 12, 2024',
           style: theme.textTheme.bodySmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
       ],
@@ -139,7 +139,7 @@ class _AddEstimateScreenState extends State<AddEstimateScreen> {
         Text(
           'Client',
           style: theme.textTheme.headlineSmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 8),
@@ -183,7 +183,7 @@ class _AddEstimateScreenState extends State<AddEstimateScreen> {
         Text(
           'Pricing Summary',
           style: theme.textTheme.headlineSmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 10),
@@ -206,7 +206,7 @@ class _AddEstimateScreenState extends State<AddEstimateScreen> {
         Text(
           'Payment Options',
           style: theme.textTheme.headlineSmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         buildSwitchOption(
@@ -236,7 +236,7 @@ class _AddEstimateScreenState extends State<AddEstimateScreen> {
         Text(
           'Attachments',
           style: theme.textTheme.headlineSmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         buildAttachmentOption(Icons.image, 'Add Image', theme),
@@ -252,7 +252,7 @@ class _AddEstimateScreenState extends State<AddEstimateScreen> {
         Text(
           'Client Acceptance',
           style: theme.textTheme.headlineSmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         buildSwitchOption(

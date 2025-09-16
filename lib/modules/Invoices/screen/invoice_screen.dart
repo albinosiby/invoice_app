@@ -71,13 +71,13 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.background,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         elevation: 2,
         title: Text(
           'Invoices',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onBackground,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         actions: [
@@ -264,7 +264,7 @@ class InvoiceSearchField extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       child: TextField(
         controller: controller,
-        style: TextStyle(color: theme.colorScheme.onBackground),
+        style: TextStyle(color: theme.colorScheme.onSurface),
         decoration: InputDecoration(
           hintText: 'Search Invoices',
           hintStyle: TextStyle(

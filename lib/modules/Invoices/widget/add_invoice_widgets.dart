@@ -19,7 +19,7 @@ Widget buildItemRow(
           Text(
             itemName,
             style: theme.textTheme.bodyLarge?.copyWith(
-              color: theme.colorScheme.onBackground,
+              color: theme.colorScheme.onSurface,
             ),
           ),
           Text(
@@ -33,7 +33,7 @@ Widget buildItemRow(
       Text(
         price,
         style: theme.textTheme.bodyLarge?.copyWith(
-          color: theme.colorScheme.onBackground,
+          color: theme.colorScheme.onSurface,
         ),
       ),
     ],
@@ -62,7 +62,7 @@ Widget buildPricingRow(icon, String label, String value, ThemeData theme) {
         Text(
           value,
           style: theme.textTheme.titleSmall?.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
       ],
@@ -85,10 +85,10 @@ Widget buildPriceRow(
           label,
           style: isTotal
               ? theme.textTheme.titleLarge?.copyWith(
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                 )
               : theme.textTheme.titleLarge?.copyWith(
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                 ),
         ),
         const Spacer(),
@@ -96,10 +96,10 @@ Widget buildPriceRow(
           value,
           style: isTotal
               ? theme.textTheme.titleLarge?.copyWith(
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                 )
               : theme.textTheme.titleLarge?.copyWith(
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                 ),
         ),
       ],

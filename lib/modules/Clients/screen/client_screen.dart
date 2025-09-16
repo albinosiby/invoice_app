@@ -119,13 +119,13 @@ class _ClientScreenState extends State<ClientScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.background,
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         elevation: 0,
         title: Text(
           'Clients',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onBackground,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         actions: [
@@ -261,9 +261,7 @@ class _ClientScreenState extends State<ClientScreen> {
             Icon(
               Icons.people_outline,
               size: 64,
-              color: Theme.of(
-                context,
-              ).colorScheme.onBackground.withOpacity(0.3),
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
             ),
             const SizedBox(height: 16),
             Text(
@@ -271,9 +269,7 @@ class _ClientScreenState extends State<ClientScreen> {
                   ? 'No clients match your search'
                   : 'No clients found',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(
-                  context,
-                ).colorScheme.onBackground.withOpacity(0.5),
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
               ),
             ),
             if (_searchQuery.isNotEmpty)
@@ -320,7 +316,7 @@ class ClientSearchField extends StatelessWidget {
       color: theme.colorScheme.surface,
       child: TextField(
         controller: controller,
-        style: TextStyle(color: theme.colorScheme.onBackground),
+        style: TextStyle(color: theme.colorScheme.onSurface),
         decoration: InputDecoration(
           hintText: 'Search Clients', // Changed from 'Search Invoices'
           hintStyle: TextStyle(

@@ -81,7 +81,7 @@ Widget buildInvoiceCard(
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.more_vert),
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                 ),
               ],
             ),
